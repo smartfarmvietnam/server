@@ -20,32 +20,24 @@
     <link rel="stylesheet" href="css/style2.css">
   </head>
   <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
+      <div class = "selectFarm">
         <div class="container-fluid">
           <div class="animated fadeIn">
             <div class="row">
-              <div class="col-sm-6 col-lg-3">
-                <div class="card text-white bg-primary">
+              <div class="col" id ="farm_btn">
+                <div class="card text-white bg-primary"  style = "height: 70px">
                   <div class="card-body pb-0">
-                    <div class="btn-group float-right">
-                      <!-- <button class="btn btn-transparent dropdown-toggle p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="icon-settings"></i>
-                      </button> -->
-                      <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                      </div>
-                    </div>
                     <!-- <div class="text-value">9.823</div> -->
                     <div class="text-value">SmartFarm</div>
                   </div>
-                  <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
+                  <div class="chart-wrapper mt-3 mx-3">
                     <canvas class="chart" id="card-chart1" height="70"></canvas>
                   </div>
                 </div>
               </div>
-              <div class="col-sm-6 col-lg-3">
-                <div class="card text-white bg-info">
+
+              <div class="col" id = "aqua_btn">
+                <div class="card text-white bg-info" style = "height: 70px; margin-left: -20px;">
                   <div class="card-body pb-0">
                     <!-- <button class="btn btn-transparent p-0 float-right" type="button">
                       <i class="icon-location-pin"></i>
@@ -53,55 +45,16 @@
                     <div class="text-value">AquaPhonix</div>
                     <!-- <div></div>     -->
                   </div>
-                  <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
+                  <div class="chart-wrapper mt-3 mx-3">
                     <canvas class="chart" id="card-chart2" height="70"></canvas>
                   </div>
                 </div>
               </div>
-              <div class="col-sm-6 col-lg-3">
-                <div class="card text-white bg-warning">
-                  <div class="card-body pb-0">
-                    <div class="btn-group float-right">
-                      <button class="btn btn-transparent dropdown-toggle p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="icon-settings"></i>
-                      </button>
-                      <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                      </div>
-                    </div>
-                    <div class="text-value">Hi</div>
-                    <!-- <div>Members online</div> -->
-                  </div>
-                  <div class="chart-wrapper mt-3" style="height:70px;">
-                    <canvas class="chart" id="card-chart3" height="70"></canvas>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6 col-lg-3">
-                <div class="card text-white bg-danger">
-                  <div class="card-body pb-0">
-                    <div class="btn-group float-right">
-                      <!-- <button class="btn btn-transparent dropdown-toggle p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="icon-settings"></i>
-                      </button> -->
-                      <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                      </div>
-                    </div>
-                    <div class="text-value">9.</div>
-                    <!-- <div>Members online</div> -->
-                  </div>
-                  <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
-                    <canvas class="chart" id="card-chart4" height="70"></canvas>
-                  </div>
-                </div>
-              </div>
+             </div>
+            </div>
               <!-- /.col-->
             </div>
+      </div>
             <div class="card">
                     <div class="card-body">
                       <div class="row">
@@ -179,10 +132,8 @@
                         </div>
                       </div>
                     </div>
-            </div>
-          </div>
-        </div>
-     
+              </div>
+    
     <!-- CoreUI and necessary plugins-->
     <script src="/jq/jquery.min.js"></script>
     <!-- <script src="node_modules/popper.js/dist/umd/popper.min.js"></script> -->
@@ -204,6 +155,8 @@
     //     }
     // }
     // getData();
+    document.getElementById('farm_btn').addEventListener('click' , e => location.href="/aa")
+
         $('.humid_btn').on('click', (event)=>{
             // get_humid();
             clearInterval();
