@@ -14,33 +14,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <!-- <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template"> -->
-    <!-- <meta name="author" content="Łukasz Holeczek"> -->
-    <!-- <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard"> -->
     <title>CoreUI Free Bootstrap Admin Template</title>
-    <!-- Icons-->
-    <!-- <link rel="icon" type="image/ico" href="./img/favicon.ico" sizes="any" />
-    <link href="node_modules/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
-    <link href="node_modules/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
-    <link href="node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="node_modules/simple-line-icons/css/simple-line-icons.css" rel="stylesheet"> -->
     <!-- Main styles for this application-->
     <link href="css/style.css" rel="stylesheet">
-    <!-- <link href="vendors/pace-progress/css/pace.min.css" rel="stylesheet"> -->
-    <!-- Global site tag (gtag.js) - Google Analytics-->
-    <!-- <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-118965717-3"></script> -->
-    <script>
-    //   window.dataLayer = window.dataLayer || [];
-
-    //   function gtag() {
-    //     dataLayer.push(arguments);
-    //   }
-    //   gtag('js', new Date());
-    //   // Shared ID
-    //   gtag('config', 'UA-118965717-3');
-    //   // Bootstrap ID
-    //   gtag('config', 'UA-118965717-5');
-    </script>
+    <link rel="stylesheet" href="css/style2.css">
   </head>
   <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
         <div class="container-fluid">
@@ -153,7 +130,7 @@
                       </div>
                       <!-- /.row-->
                       <div class="chart-wrapper" style="height:300px;margin-top:40px;">
-                        <div id="humid_val" style="font-size:100px"></div>
+                        <div id="data_show" style="font-size:100px"></div>
                       </div>
                     </div>
                     <div class="card-footer smartfarm">
@@ -172,28 +149,32 @@
                           </label>
                           <div id="sf_h"></div>
                           <div class="progress progress-xs mt-2">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-info" id='sf_h_bar' role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
                         </div>
                         <div class="col-sm-12 col-md mb-sm-2 mb-0">
                           <div class="text-muted">?</div>
-                          <strong>(60%)</strong>
+                          <strong>aqua_ph</strong>
+                          
+                          <label class="btn btn-outline-secondary ph_btn">
+                          </label>
+                          <div id="aqua_ph"></div>
                           <div class="progress progress-xs mt-2">
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-warning" id='sf_h_bar' role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
                         </div>
                         <div class="col-sm-12 col-md mb-sm-2 mb-0">
                           <div class="text-muted">?</div>
                           <strong>(80%)</strong>
                           <div class="progress progress-xs mt-2">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-danger" id='sf_h_bar' role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
                         </div>
                         <div class="col-sm-12 col-md mb-sm-2 mb-0">
                           <div class="text-muted">?</div>
                           <strong>(40%)</strong>
                           <div class="progress progress-xs mt-2">
-                            <div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar" id='sf_h_bar' role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
                         </div>
                       </div>
@@ -203,9 +184,9 @@
         </div>
      
     <!-- CoreUI and necessary plugins-->
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/jq/jquery.min.js"></script>
     <!-- <script src="node_modules/popper.js/dist/umd/popper.min.js"></script> -->
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/bs/bootstrap.min.js"></script>
     <script>
     //     async function getData() {
     //     let x = document.getElementsByClassName('');
@@ -225,14 +206,45 @@
     // getData();
         $('.humid_btn').on('click', (event)=>{
             // get_humid();
+            clearInterval();
             setInterval(()=>{
                 get_humid();
-            },1000);
+            },3000);
         })
+        
+        $('.ph_btn').on('click', (event)=>{
+            // get_humid();
+            clearInterval();
+            setInterval(()=>{
+                get_aqua_ph();
+            },2000);
+        })
+
+        async function get_aqua_ph(){
+            console.log("aqua");
+        $.ajax({
+            url:"http://192.168.43.223:3000/get_ph",
+            type:"GET",
+            dataType:"json"
+
+        })
+        .done( function (data){
+            var a =  data[0].ph;
+            console.log(data);
+            $('#data_show').empty();
+            $('#data_show').append(a+'%');
+            $('#aqua_ph').empty();
+            $('#aqua_ph').append('<strong>'+a+'%</strong>');
+
+        });
+        }
+
+
+
         async function get_humid(){
             console.log("click");
         $.ajax({
-            url:"http://localhost:3000/get_humid",
+            url:"http://192.168.43.223:3000/get_humid",
             type:"GET",
             dataType:"json"
 
@@ -240,10 +252,11 @@
         .done( function (data){
             var a =  data[0].humid;
             console.log(data);
-            $('#humid_val').empty();
-            $('#humid_val').append(a+'%');
+            $('#data_show').empty();
+            $('#data_show').append(a+'%');
             $('#sf_h').empty();
             $('#sf_h').append('<strong>'+a+'%</strong>');
+
         });
         }
     </script>
