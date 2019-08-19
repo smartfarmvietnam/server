@@ -26,6 +26,14 @@ res.header("Access-Control-Allow-Origin", "*");
 res.header("Access-Control-Allow-Headers","X-Requested-With");
 next();
 })
+function get_time() {
+  var time = new Date();
+  var y = time.getFullYear();
+  var m = time.getMonth();
+  var d = time.getDay();
+  var date = y+"-"+m+"-"+d+"-";
+  return date;
+}
 
 //데이터 확인 페이지
 app.get('/',(req,res)=>{
@@ -43,16 +51,22 @@ console.log("con!");
  * 클라이언트와 http통신하는 곳
  */
 
-//스마트팜 토양습도저장
+//스마트팜 대기습도
 app.get('/smart_humid', (req,res) => {
   humid = req.query.humid;
   humid_date = req.query.humid_date;
   if(humid  && humid_date){
     console.log(req.query);
     
+<<<<<<< HEAD
     console.log('humid : '+ humid);
     console.log('humid_date : '+ humid_date);
     connection.query('insert into smart_soil_humid (humid, date) values(?,?)',  
+=======
+    console.log('humid : '+humid);
+    console.log('humid_date : '+humid_date);
+    connection.query('insert into smartfarm_humid (humid, date) values(?,?)',  
+>>>>>>> bd8604c17fcf780118c731ccdb03a509ad611539
     [humid,humid_date],
     (err, rows) => {
         if(err) console.log(err);
@@ -62,18 +76,30 @@ app.get('/smart_humid', (req,res) => {
   else res.send("fail");
 });
 
+<<<<<<< HEAD
 app.get('/ ', (req, res) => {
+=======
+app.get('/smart_humid_temp', (req, res) => {
+  var date = get_time();
+  
+  humid_date = y+"-"+m+"-"+d+"-"+req.query.humid_date;
+  
+>>>>>>> bd8604c17fcf780118c731ccdb03a509ad611539
   humid = req.query.humid;
   temp = req.query.temp;
-  humid_date = req.query.humid_date;
   if(humid && temp && humid_date){
     console.log(req.query);
     
     console.log('humid : '+ humid);
     console.log('humid_date : '+ temp);
     console.log('humid_date : '+ humid_date);
-    connection.query('insert into smart_soil_humid (humid, temp, date) values(?,?)',  
-    [humid,temp, humid_date],
+    connection.query('insert into smartfarm_humid (humid, date) values(?,?)',  
+    [humid, humid_date],
+    (err, rows) => {
+        if(err) console.log(err);
+    })
+    connection.query('insert into smartfarm_temp (temp, date) values(?,?)',  
+    [temp, humid_date],
     (err, rows) => {
         if(err) console.log(err);
     })
@@ -83,18 +109,31 @@ app.get('/ ', (req, res) => {
 });
 
 
+<<<<<<< HEAD
 //스마트팜 토양습도확인
 app.get('/get_humid_temp', function(req,res){
   // var humid = "asdf"
   connection.query('SELECT * FROM aqua_ph order by id desc limit 1',(err , rows)=>{
     console.log('con?')
+=======
+/**
+ * 
+ * 받아온 데이터 보여줘
+ */
+
+//스마트팜 대기온도확인
+app.get('/get_smarttemp', function(req,res){
+  connection.query('SELECT * FROM smartfarm_temp order by id desc limit 1',(err , rows)=>{
     res.send(rows)
   });
-  // console.log(humid);
-  // res.send(humid);
-
 })
-
+//스마트팜 대기습도확인
+app.get('/get_smarthumid', function(req,res){
+  connection.query('SELECT * FROM smartfarm_humid order by id desc limit 1',(err , rows)=>{
+>>>>>>> bd8604c17fcf780118c731ccdb03a509ad611539
+    res.send(rows)
+  });
+})
 //스마트팜 토양습도확인
 app.get('/get_humid', function(req,res){
   // var humid = "asdf"
