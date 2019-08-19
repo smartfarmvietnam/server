@@ -73,10 +73,7 @@ app.get('/smart_humid', (req,res) => {
 
 app.get('/smart_humid_temp_A', (req, res) => {
   var date = get_time();
-
-  
-  humid_date = y+"-"+m+"-"+d+"-"+req.query.humid_date;
-  
+  humid_date = date  + req.query.humid_date;
   humid = req.query.humid;
   temp = req.query.temp;
 
@@ -86,12 +83,39 @@ app.get('/smart_humid_temp_A', (req, res) => {
     console.log('humid : '+ humid);
     console.log('humid_date : '+ temp);
     console.log('humid_date : '+ humid_date);
-    connection.query('insert into smartfarm_humid (humid, date) values(?,?)',  
+    connection.query('insert into smartfarm_humid_A (humid, date) values(?,?)',  
     [humid, humid_date],
     (err, rows) => {
         if(err) console.log(err);
     })
-    connection.query('insert into smartfarm_temp (temp, date) values(?,?)',  
+    connection.query('insert into smartfarm_temp_A (temp, date) values(?,?)',  
+    [temp, humid_date],
+    (err, rows) => {
+        if(err) console.log(err);
+    })
+    res.send("ok")
+  }
+  else res.send("fail");
+});
+
+app.get('/smart_humid_temp_B', (req, res) => {
+  var date = get_time();
+  humid_date = date  + req.query.humid_date;
+  humid = req.query.humid;
+  temp = req.query.temp;
+
+  if(humid && temp && humid_date){
+    console.log(req.query);
+    
+    console.log('humid : '+ humid);
+    console.log('humid_date : '+ temp);
+    console.log('humid_date : '+ humid_date);
+    connection.query('insert into smartfarm_humid_B (humid, date) values(?,?)',  
+    [humid, humid_date],
+    (err, rows) => {
+        if(err) console.log(err);
+    })
+    connection.query('insert into smartfarm_temp_B (temp, date) values(?,?)',  
     [temp, humid_date],
     (err, rows) => {
         if(err) console.log(err);

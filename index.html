@@ -110,6 +110,7 @@
     <!-- <script src="node_modules/popper.js/dist/umd/popper.min.js"></script> -->
     <script src="/bs/bootstrap.min.js"></script>
     <script>
+
     //     async function getData() {
     //     let x = document.getElementsByClassName('');
     //     try {
@@ -128,13 +129,16 @@
     // getData();
     document.getElementById('farm_btn').addEventListener('click' , e => location.href="/");
     document.getElementById('aqua_btn').addEventListener('click' , e => location.href="/aquaPhonix");
-
+    function get_smarttemp() {
+      //
+    }    
+    var smartfarm_data = setInterval(get_smartfarm_data(),5000);
         $('.humid_btn').on('click', (event)=>{
             // get_humid();
             clearInterval();
             setInterval(()=>{
                 get_humid();
-            },3000);
+            },5000);
         })
         
         $('.ph_btn').on('click', (event)=>{
