@@ -45,10 +45,9 @@ console.log("con!");
 
 //스마트팜 토양습도저장
 app.get('/smart_humid', (req,res) => {
-  console.log('test');
   humid = req.query.humid;
   humid_date = req.query.humid_date;
-  if(req.query.humid && req.query.humid_date){
+  if(humid  && humid_date){
     console.log(req.query);
     
     console.log('humid : '+req.query.humid);
@@ -63,9 +62,25 @@ app.get('/smart_humid', (req,res) => {
   else res.send("fail");
 });
 
-app.get('/smart_humid_temp', (req, res)) => {
-  
-}
+app.get('/smart_humid_temp', (req, res) => {
+  humid = req.query.humid;
+  temp = req.query.temp;
+  humid_date = req.query.humid_date;
+  if(humid && temp && humid_date){
+    console.log(req.query);
+    
+    console.log('humid : '+ humid);
+    console.log('humid_date : '+ temp);
+    console.log('humid_date : '+ humid_date);
+    connection.query('insert into smart_soil_humid (humid, temp, date) values(?,?)',  
+    [humid,temp, humid_date],
+    (err, rows) => {
+        if(err) console.log(err);
+    })
+    res.send("ok")
+  }
+  else res.send("fail");
+});
 
 
 /**
