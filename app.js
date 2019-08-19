@@ -97,7 +97,62 @@ app.get('/smart_humid_temp_A', (req, res) => {
   }
   else res.send("fail");
 });
-
+app.get('/aqua_fish_data',(req,res)=>{
+  var date = get_time();
+  var aqua_date = date + req.query.date;
+  var aqua_ec = req.query.ec;
+  var aqua_do = req.query.do;
+  var aqua_temp = req.query.wtemp;
+  var aqua_ph = req.query.ph;
+  connection.query('insert into aqua_fish_ec (ec, date) values(?,?)',
+  [aqua_ec, aqua_date],
+  (err, rows) => {
+      if(err) console.log(err);
+  })
+  connection.query('insert into aqua_fish_wtemp (wtemp, date) values(?,?)',  
+  [aqua_temp, aqua_date],
+  (err, rows) => {
+      if(err) console.log(err);
+  })
+  connection.query('insert into aqua_fish_do (do, date) values(?,?)',
+  [aqua_do, aqua_date],
+  (err, rows) => {
+      if(err) console.log(err);
+  })
+  connection.query('insert into aqua_fish_ph (ph, date) values(?,?)',  
+  [aqua_ph, aqua_date],
+  (err, rows) => {
+      if(err) console.log(err);
+  })
+})
+app.get('/aqua_bio_data',(req,res)=>{
+  var date = get_time();
+  var aqua_date = date + req.query.date;
+  var aqua_ec = req.query.ec;
+  var aqua_do = req.query.do;
+  var aqua_temp = req.query.wtemp;
+  var aqua_ph = req.query.ph;
+  connection.query('insert into aqua_bio_ec (ec, date) values(?,?)',
+  [aqua_ec, aqua_date],
+  (err, rows) => {
+      if(err) console.log(err);
+  })
+  connection.query('insert into aqua_bio_wtemp (wtemp, date) values(?,?)',  
+  [aqua_temp, aqua_date],
+  (err, rows) => {
+      if(err) console.log(err);
+  })
+  connection.query('insert into aqua_bio_do (do, date) values(?,?)',
+  [aqua_do, aqua_date],
+  (err, rows) => {
+      if(err) console.log(err);
+  })
+  connection.query('insert into aqua_bio_ph (ph, date) values(?,?)',  
+  [aqua_ph, aqua_date],
+  (err, rows) => {
+      if(err) console.log(err);
+  })
+})
 app.get('/smart_humid_temp_B', (req, res) => {
   var date = get_time();
   humid_date = date  + req.query.humid_date;

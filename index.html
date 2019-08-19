@@ -65,8 +65,9 @@
                       </div>
                       <!-- /.row-->
                       <div class="chart-wrapper" style="height:300px;margin-top:40px;">
+                        <div class="row"></div>
                         <div id="data_show" style="font-size:100px"></div>
-                          <div class="row text-center">
+                          <div class="row text-center" >
                             <div class="col-sm-12 col-md mb-sm-2 mb-0" >
                               <strong>humid</strong>
                               <!-- <label class="btn btn-outline-secondary humid_btn">
@@ -100,6 +101,7 @@
                               </div>
                             </div>
                           </div>
+
                         </div>
                     </div>
                 </div>
@@ -129,10 +131,15 @@
     // getData();
     document.getElementById('farm_btn').addEventListener('click' , e => location.href="/");
     document.getElementById('aqua_btn').addEventListener('click' , e => location.href="/aquaPhonix");
+
+
+
+    //여기 밑으로 수정할거임 ㅇㅋ?
     function get_smarttemp() {
       //
     }    
     var smartfarm_data = setInterval(get_smartfarm_data(),5000);
+    //정지하는법 = clearInterval(smartfarm_data);
         $('.humid_btn').on('click', (event)=>{
             // get_humid();
             clearInterval();
@@ -166,11 +173,8 @@
             $('#aqua_ph').append('<strong>'+a+'%</strong>');
 
         });
-        }
-
-
-
-        async function get_humid(){
+      }
+      async function get_humid(){
             console.log("click");
         $.ajax({
             url:"http://192.168.43.223:3000/get_humid",
@@ -185,7 +189,6 @@
             $('#data_show').append(a+'%');
             $('#sf_h').empty();
             $('#sf_h').append('<strong>'+a+'%</strong>');
-
         });
         }
     </script>
