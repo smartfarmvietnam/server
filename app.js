@@ -28,7 +28,7 @@ next();
 })
 
 //데이터 확인 페이지
-app.get('/aa',(req,res)=>{
+app.get('/',(req,res)=>{
   console.log('a');
   res.sendfile('index.html');
 })
@@ -50,8 +50,8 @@ app.get('/smart_humid', (req,res) => {
   if(humid  && humid_date){
     console.log(req.query);
     
-    console.log('humid : '+req.query.humid);
-    console.log('humid_date : '+req.query.humid_date);
+    console.log('humid : '+ humid);
+    console.log('humid_date : '+ humid_date);
     connection.query('insert into smart_soil_humid (humid, date) values(?,?)',  
     [humid,humid_date],
     (err, rows) => {
@@ -62,7 +62,7 @@ app.get('/smart_humid', (req,res) => {
   else res.send("fail");
 });
 
-app.get('/smart_humid_temp', (req, res) => {
+app.get('/ ', (req, res) => {
   humid = req.query.humid;
   temp = req.query.temp;
   humid_date = req.query.humid_date;
@@ -82,11 +82,6 @@ app.get('/smart_humid_temp', (req, res) => {
   else res.send("fail");
 });
 
-
-/**
- * 
- * 받아온 데이터 DB에 저장
- */
 
 //스마트팜 토양습도확인
 app.get('/get_humid_temp', function(req,res){
@@ -109,7 +104,6 @@ app.get('/get_humid', function(req,res){
   });
   // console.log(humid);
   // res.send(humid);
-
 })
 
 //접속테스트용
