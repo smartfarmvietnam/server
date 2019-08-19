@@ -1,15 +1,18 @@
 html body {
     padding-top: 20px;
+    height: 100%;
 }
-
 
 .card {
   margin-left: 5px;
   margin-top: -15px;
-
+  
 }
-
 
 #AquaPhonix {
     margin-right: -10px;
+}
+
+.card-body {
+  height: auto;
 }
