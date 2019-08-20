@@ -64,11 +64,11 @@
                     </div>
                       <!-- /.row-->
                       <div class="chart-wrapper" >
-                          <div id="data_show" style="font-size:50px">sdasd</div>
+                          <div id="data_show" style="font-size:50px"></div>
                           <!-- 여기다 넣기 -->
                        <div class="data_list">
                           <div class="col-sm-12 col-md mb-sm-2 mb-0">
-                              <div class="text-muted"><strong>(80%)</strong></div>
+                              <div class="text-muted1">여기 습도값</div>
                              
                               <div id="sf_h"></div>
                               <div class="progress progress-xs mt-2" style="height: 30px;">
@@ -76,7 +76,7 @@
                               </div>
                           </div>
                           <div class="col-sm-12 col-md mb-sm-2 mb-0">
-                            <div class="text-muted">?  <strong>(80%)</strong></div>
+                            <div class="text-muted">습도</div>
                              
                             <div class="progress progress-xs mt-2" style="height: 30px;">
                               <div class="progress-bar" id='sf_h_bar' role="progressbar" style="width: 50%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
@@ -120,71 +120,31 @@
     // getData();
     document.getElementById('farm_btn').addEventListener('click' , e => location.href="/");
     document.getElementById('aqua_btn').addEventListener('click' , e => location.href="/aqua");
-    if(href === "/"){
-      console.log(href);
-      console.log("스마트팜");
-
-    }else{
-      console.log(href);
-      console.log("아쿠아");
-    }
-
-
-    //여기 밑으로 수정할거임 ㅇㅋ?
-    function get_smarttemp() {
-      //
-    }    
-    var smartfarm_data = setInterval(get_smartfarm_data(),5000);
-    //정지하는법 = clearInterval(smartfarm_data);
-        $('.humid_btn').on('click', (event)=>{
-            // get_humid();
-            clearInterval();
-            setInterval(()=>{
-                get_humid();
-            },5000);
-        })
+    get_humid();
+    // function get_smarttemp() {
+    //   //
+    // }    
+    // var smartfarm_data = setInterval(get_smartfarm_data(),5000);
+    // 정지하는법 = clearInterval(smartfarm_data);
         
-        $('.ph_btn').on('click', (event)=>{
-            // get_humid();
-            clearInterval();
-            setInterval(()=>{
-                get_aqua_ph();
-            },2000);
-        })
-
-        async function get_aqua_ph(){
-            console.log("aqua");
-        $.ajax({
-            url:"http://192.168.43.223:3000/get_ph",
-            type:"GET",
-            dataType:"json"
-
-        })
-        .done( function (data){
-            var a =  data[0].ph;
-            console.log(data);
-            $('#data_show').empty();
-            $('#data_show').append(a+'%');
-            $('#aqua_ph').empty();
-            $('#aqua_ph').append('<strong>'+a+'%</strong>');
-
-        });
-      }
+      
       async function get_humid(){
             console.log("click");
         $.ajax({
-            url:"http://192.168.43.223:3000/get_humid",
+            url:"http://192.168.1.111:3000/get_humid",
             type:"GET",
             dataType:"json"
 
         })
         .done( function (data){
-            var a =  data[0].humid;
+            let humid =  data[0].humid;
+            let time = data[0].date;
+         
             console.log(data);
             $('#data_show').empty();
-            $('#data_show').append(a+'%');
-            $('#sf_h').empty();
-            $('#sf_h').append('<strong>'+a+'%</strong>');
+            $('#data_show').append(time);
+            $('#text-muted1').empty();
+            $('#text-muted1').append('<strong>'+'습도'+humid+'%</strong>');
         });
         }
     </script>

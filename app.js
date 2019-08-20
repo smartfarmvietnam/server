@@ -249,7 +249,7 @@ app.get('/get_smarthumid', function(req,res){
 //스마트팜 토양습도확인
 app.get('/get_humid', function(req,res){
   // var humid = "asdf"
-  connection.query('SELECT * FROM smart_soil_humid order by id desc limit 1',(err , rows)=>{
+  connection.query('SELECT * FROM smartfarm_humid order by id desc limit 1',(err , rows)=>{
     console.log('con?')
     res.send(rows)
   });

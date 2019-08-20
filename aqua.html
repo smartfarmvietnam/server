@@ -63,12 +63,13 @@
                       </div>
                     </div>
                       <!-- /.row-->
+                      
                       <div class="chart-wrapper" >
-                          <div id="data_show" style="font-size:50px">sdasd</div>
+                          <div id="data_show" style="font-size:50px">2019.08.20 08:55</div>
                           <!-- 여기다 넣기 -->
                        <div class="data_list">
                           <div class="col-sm-12 col-md mb-sm-2 mb-0">
-                              <div class="text-muted"><strong>(80%)</strong></div>
+                              <div class="text-muted"><strong>머새갸(80%)</strong></div>
                              
                               <div id="sf_h"></div>
                               <div class="progress progress-xs mt-2" style="height: 30px;">
@@ -107,7 +108,8 @@
     <!-- <script src="node_modules/popper.js/dist/umd/popper.min.js"></script> -->
     <script src="/bs/bootstrap.min.js"></script>
     <script>
-
+    let time = new Date();
+    
     //     async function getData() {
     //     let x = document.getElementsByClassName('');
     //     try {
@@ -135,13 +137,7 @@
     }    
     var smartfarm_data = setInterval(get_smartfarm_data(),5000);
     //정지하는법 = clearInterval(smartfarm_data);
-        $('.humid_btn').on('click', (event)=>{
-            // get_humid();
-            clearInterval();
-            setInterval(()=>{
-                get_humid();
-            },5000);
-        })
+
         
         $('.ph_btn').on('click', (event)=>{
             // get_humid();
@@ -169,23 +165,7 @@
 
         });
       }
-      async function get_humid(){
-            console.log("click");
-        $.ajax({
-            url:"http://192.168.43.223:3000/get_humid",
-            type:"GET",
-            dataType:"json"
-
-        })
-        .done( function (data){
-            var a =  data[0].humid;
-            console.log(data);
-            $('#data_show').empty();
-            $('#data_show').append(a+'%');
-            $('#sf_h').empty();
-            $('#sf_h').append('<strong>'+a+'%</strong>');
-        });
-        }
+      
     </script>
   </body>
 </html>
