@@ -29,8 +29,8 @@ next();
 function get_time() {
   var time = new Date();
   var y = time.getFullYear();
-  var m = time.getMonth();
-  var d = time.getDay();
+  var m = time.getMonth()+1;
+  var d = time.getDate();
   var date = y+"-"+m+"-"+d+"-";
   return date;
 }
@@ -162,23 +162,15 @@ app.get('/smart_humid_temp', (req, res) => {
 
 //스마트팜 대기온도확인
 app.get('/get_smarttemp', function(req,res){
-  var json = new Object();
-  connection.query('SELECT * FROM smartfarm_humid_A order by id desc limit 1',(err , rows)=>{
-    // res.send(rows.humid)
-    json.humid = rows.humid;
-  });
-  connection.query('SELECT * FROM smartfarm_temp_B order by id desc limit 1',(err , rows)=>{
-    // res.send(rows.temp)
-    json.humid = rows.temp;
-  });
-  return JSON.parse(json);
-})
-// 스마트팜 대기 온&습도
-app.get('/get_smartfarmair', function(req,res){
-  connection.query('SELECT * FROM smartfarm_temp order by id desc limit 1',(err , rows)=>{
+  connection.query('SELECT * FROM smartfarm_temp_a order by id desc limit 1',(err , rows)=>{
     res.send(rows)
   });
-  
+})
+// 스마트팜 대기 온&습도
+app.get('/get_smarthumid', function(req,res){
+  connection.query('SELECT * FROM smartfarm_humid_a order by id desc limit 1',(err , rows)=>{
+    res.send(rows)
+  });
 })
 //스마트팜 대기습도확인
 app.get('/get_smarthumid', function(req,res){
