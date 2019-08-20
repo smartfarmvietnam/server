@@ -41,6 +41,11 @@ app.get('/',(req,res)=>{
   res.sendfile('index.html');
 })
 
+app.get('/aqua',(req,res)=>{
+  console.log('a');
+  res.sendfile('aqua.html');
+})
+
 
 connection.connect(function(err) {
 if (err) throw err;
@@ -59,8 +64,8 @@ app.get('/smart_humid', (req,res) => {
   if(humid  && humid_date){
     console.log(req.query);
     
-    console.log('humid : '+humid);
-    console.log('humid_date : '+humid_date);
+    console.log('humid : '+ humid);
+    console.log('humid_date : '+ humid_date);
     connection.query('insert into smartfarm_humid (humid, date) values(?,?)',  
     [humid,humid_date],
     (err, rows) => {
