@@ -9,7 +9,7 @@
 -->
 <html lang="en">
   <head>
-    <base href="./">
+    <base href="./aqua">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -89,7 +89,13 @@
                                 <div class="progress-bar bg-danger"bg-info id='sf_h_bar' role="progressbar" style="width: 60%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                               </div>
                           </div>
-                    
+                          <div class="col-sm-12 col-md mb-sm-2 mb-0">
+                              <div class="text-muted">?   <strong>(80%)</strong></div>
+                              
+                              <div class="progress progress-xs mt-2" style="height: 30px;">
+                                <div class="progress-bar bg-info" id='sf_h_bar' role="progressbar" style="width: 10%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                              </div>
+                          </div>
                        </div>  
                      </div>
                   </div>
@@ -120,14 +126,7 @@
     // getData();
     document.getElementById('farm_btn').addEventListener('click' , e => location.href="/");
     document.getElementById('aqua_btn').addEventListener('click' , e => location.href="/aqua");
-    if(href === "/"){
-      console.log(href);
-      console.log("스마트팜");
 
-    }else{
-      console.log(href);
-      console.log("아쿠아");
-    }
 
 
     //여기 밑으로 수정할거임 ㅇㅋ?
