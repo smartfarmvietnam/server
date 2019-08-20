@@ -68,27 +68,32 @@
                           <!-- 여기다 넣기 -->
                        <div class="data_list">
                           <div class="col-sm-12 col-md mb-sm-2 mb-0">
-                              <div class="text-muted1">여기 습도값</div>
-                             
-                              <div id="sf_h"></div>
+                              <div class="text-muted1">temp</div>
                               <div class="progress progress-xs mt-2" style="height: 30px;">
-                                <div class="progress-bar bg-warning" id='sf_h_bar' role="progressbar" style="width: 50%"aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-danger" id='sf_a_t' role="progressbar" style="width: 10%"></div>
                               </div>
                           </div>
                           <div class="col-sm-12 col-md mb-sm-2 mb-0">
-                            <div class="text-muted">습도</div>
+                            <div class="text-muted2">humid</div>
                              
                             <div class="progress progress-xs mt-2" style="height: 30px;">
-                              <div class="progress-bar" id='sf_h_bar' role="progressbar" style="width: 50%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                              <div class="progress-bar" id='sf_a_h' role="progressbar" style="width: 80%"></div>
                             </div>
                           </div>
                           <div class="col-sm-12 col-md mb-sm-2 mb-0">
-                              <div class="text-muted">? <strong>(80%)</strong></div>
+                              <div class="text-muted3">temp</div>
                                 
                               <div class="progress progress-xs mt-2" style="height: 30px;">
-                                <div class="progress-bar bg-danger"bg-info id='sf_h_bar' role="progressbar" style="width: 60%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-danger" id='sf_b_t' role="progressbar" aria-valuenow="3" aria-valuemax="100" ></div>
                               </div>
                           </div>
+                          <div class="col-sm-12 col-md mb-sm-2 mb-0">
+                            <div class="text-muted4">humid</div>
+                              
+                            <div class="progress progress-xs mt-2" style="height: 30px;">
+                              <div class="progress-bar" id='sf_b_h' role="progressbar" style="width: 60%"></div>
+                            </div>
+                        </div>
                     
                        </div>  
                      </div>
@@ -120,33 +125,49 @@
     // getData();
     document.getElementById('farm_btn').addEventListener('click' , e => location.href="/");
     document.getElementById('aqua_btn').addEventListener('click' , e => location.href="/aqua");
-    get_humid();
     // function get_smarttemp() {
     //   //
     // }    
-    // var smartfarm_data = setInterval(get_smartfarm_data(),5000);
     // 정지하는법 = clearInterval(smartfarm_data);
         
       
       async function get_humid(){
-            console.log("click");
+            // console.log("click");
         $.ajax({
-            url:"http://192.168.1.111:3000/get_humid",
+            url:"http://localhost:3000/get_smart_a",
             type:"GET",
             dataType:"json"
-
         })
         .done( function (data){
             let humid =  data[0].humid;
-            let time = data[0].date;
-         
+            let temp = data[0].temp;
             console.log(data);
-            $('#data_show').empty();
-            $('#data_show').append(time);
-            $('#text-muted1').empty();
-            $('#text-muted1').append('<strong>'+'습도'+humid+'%</strong>');
+            $('.text-muted1').empty();
+            $('.text-muted1').append("A area temperature : "+temp+"°C");
+            $('#sf_a_t').width(temp+"%");
+            $('.text-muted2').empty();
+            $('.text-muted2').append("A area humidity : "+humid+"%");
+            $('#sf_a_h').width(humid+"%");
         });
-        }
+        $.ajax({
+            url:"http://localhost:3000/get_smart_b",
+            type:"GET",
+            dataType:"json"
+        })
+        .done( function (data){
+            let humid =  data[0].humid;
+            let temp = data[0].temp;
+            console.log(data);
+            $('.text-muted3').empty();
+            $('.text-muted3').append("B area temperature : "+temp+"°C");
+            $('#sf_b_t').width(temp+"%");
+            $('.text-muted4').empty();
+            $('.text-muted4').append("B area humidity : "+humid+"%");
+            $('#sf_b_h').width(humid+"%");
+        });
+      }
+    get_humid();
+    setInterval(get_humid,5000);
     </script>
   </body>
 </html>
